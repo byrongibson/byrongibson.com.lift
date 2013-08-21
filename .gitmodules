@@ -1,0 +1,6 @@
+[submodule "submodules/bootstrap"]
+	path = submodules/bootstrap
+	url = git@github.com:twbs/bootstrap.git
+[submodule "submodules/h5bp"]
+	path = submodules/h5bp
+	url = https://github.com/h5bp/html5-boilerplate

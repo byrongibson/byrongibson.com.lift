@@ -23,29 +23,35 @@
     <link rel="stylesheet" href="/styles/main.css">
     <script src="/scripts/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body>
+<body class="lift:content_id=main">
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <main class="bs-masthead" role="main">
-        <div class="row">
-            <div style="text-align: right">
-                <h1 class="alt">app<img alt="" id="ajax-loader" style="display:none; margin-bottom: 0px; margin-left: 5px" src="/images/ajax-loader.gif"></h1>
-            </div>
+    <main class="bs-masthead" id="content" role="main">
+        <div class="column span-12 last" style="text-align: right">
+            <h1 class="alt">app<img alt="" id="ajax-loader" style="display:none; margin-bottom: 0px; margin-left: 5px" src="/images/ajax-loader.gif"></h1>
         </div>
 
-        <div class="row">
-            <div class="col-md-3">
-                <hr />
-                <span class="lift:Menu.builder"></span>
-                <div class="lift:Msgs?showAll=true"></div>
-                <hr />
-            </div>
+        <div class="column span-6 colborder sidebar">
+            <hr />
+            <span class="lift:Menu.builder"></span>
+            <div class="lift:Msgs?showAll=true"></div>
+            <hr />
+        </div>
 
-            <div id="content" class="col-md-9">
-                <div>The main content will get bound here</div>
-            </div>
+        <div id="main" class="lift:surround?with=default;at=content">
+            <h1>Not found <span>:(</span></h1>
+            <p>Sorry, but the page you were trying to view does not exist.</p>
+            <p>It looks like this was the result of either:</p>
+            <ul>
+                <li>a mistyped address</li>
+                <li>an out-of-date link</li>
+            </ul>
+            <script>
+                var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),GOOG_FIXURL_SITE = location.host;
+            </script>
+            <script src="//linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
         </div>
     </main>
 
