@@ -1,8 +1,8 @@
-name := "Lift 3.0-SNAPSHOT starter template"
+name := "byrongibson.com"
 
 version := "0.0.1"
 
-organization := "net.liftweb"
+organization := "com.byrongibson"
 
 scalaVersion := "2.10.1"
 

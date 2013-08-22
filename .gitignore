@@ -75,14 +75,6 @@ Icon?
 Thumbs.db
 .DS_Store
 
-# # Haskell #
-# ###########
-cabal-dev
-dist
-.static-cache
-static/tmp
-*.sqlite3
-
 # # Document Types #
 # ######################
 *.pdf
