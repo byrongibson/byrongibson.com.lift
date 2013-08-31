@@ -22,10 +22,9 @@ class Boot {
   def boot {
     if (!DB.jndiJdbcConnAvailable_?) {
       val vendor = 
-	new StandardDBVendor(Props.get("db.driver") openOr "org.h2.Driver",
-			     Props.get("db.url") openOr 
-			     "jdbc:h2:lift_proto.db;AUTO_SERVER=TRUE",
-			     Props.get("db.user"), Props.get("db.password"))
+          new StandardDBVendor(Props.get("db.driver") openOr "org.h2.Driver",
+          Props.get("db.url") openOr "jdbc:h2:lift_proto.db;AUTO_SERVER=TRUE",
+          Props.get("db.user"), Props.get("db.password"))
 
       LiftRules.unloadHooks.append(vendor.closeAllConnections_! _)
 
@@ -58,7 +57,7 @@ class Boot {
     //Init the jQuery module, see http://liftweb.net/jquery for more information.
     //To use jQueryModule, uncomment these lines, the jQuery import line at the top,
     //and the jQuery liftmodule line in build.sbt.  Or just drop your own jQuery
-    //into /src/main/webapp/scripts
+    //into /src/main/webapp/scripts/vendor
     //JQueryModule.InitParam.JQuery=JQueryModule.JQuery172
     //JQueryModule.init()
 
