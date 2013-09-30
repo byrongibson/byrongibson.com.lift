@@ -34,7 +34,8 @@ scalacOptions ++= Seq("-deprecation", "-unchecked")
     "net.liftmodules"         %% "mapperauth_2.5"    % "0.1-SNAPSHOT"          %  "compile" intransitive(),
     "net.liftmodules"         %% "extras_2.5"        % "0.1"                   %  "compile" intransitive(),
     "com.h2database"          %  "h2"                % "1.2.138",
-    "net.databinder.dispatch" %% "dispatch-core"     % "0.10.0"
+    "net.databinder.dispatch" %% "dispatch-core"     % "0.10.0",
+    "com.damianhelme"         %% "tbutils"           % "0.1.0"                 % "compile"
     //"net.liftmodules"         %% "lift-jquery-module_3.0-SNAPSHOT" % "2.4"
   )
 }

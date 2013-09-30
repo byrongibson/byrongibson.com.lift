@@ -38,9 +38,22 @@ class Boot {
 
     // where to search snippet
     LiftRules.addToPackages("code")
+    
+    // simple sitemap
+    val entries = List(Menu("Home") / "index",
+      Menu("Page 1") / "page1",
+      Menu("Page 2") / "page2",
+      Menu("Page 3") / "#"  >> PlaceHolder submenus (
+        Menu("Page 3a") / "page3a" ,  
+        Menu("Page 3b") / "page3b" ,
+        Menu("Page 3c") / "page3c"))
 
-    // Build SiteMap
-    def sitemap = SiteMap(
+    def sitemap = SiteMap(entries: _*)
+    LiftRules.setSiteMap(sitemap)
+
+
+    // Complex SiteMap
+    /*def sitemap = SiteMap(
       Menu.i("Home") / "index" >> User.AddUserMenusAfter, // the simple way to declare a menu
 
       // more complex because this menu allows anything in the
@@ -50,9 +63,30 @@ class Boot {
 
     def sitemapMutators = User.sitemapMutator
 
+    def userLinkText = User.currentUser.map(_.shortName).openOr("not logged in").toString
+ 
+    val entries = List(Menu("Home") / "index" >> LocGroup("main"),
+        Menu("Page 1") / "page1" >> LocGroup("main"),
+        Menu("Page 2") / "page2" >> LocGroup("main"),
+        Menu("Page 3") / "page3" >> LocGroup("main") >> PlaceHolder submenus (
+            Menu("Page 3a") / "page3a" ,  
+            Menu("Page 3b") / "page3b" ,
+            Menu("Page 3c") / "page3c") ,
+        User.loginMenuLoc.open_!,
+        User.createUserMenuLoc.open_!,
+        Menu("user",userLinkText)  / "#" >> 
+          MustBeLoggedIn >> LocGroup("user") >> PlaceHolder submenus (
+              User.logoutMenuLoc.open_!,
+              User.editUserMenuLoc.open_!,
+              User.changePasswordMenuLoc.open_!
+                )
+        )
+
+
     // set the sitemap.  Note if you don't want access control for
     // each page, just comment this line out.
     LiftRules.setSiteMapFunc(() => sitemapMutators(sitemap))
+    */
 
     //Init the jQuery module, see http://liftweb.net/jquery for more information.
     //To use jQueryModule, uncomment these lines, the jQuery import line at the top,
