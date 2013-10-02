@@ -3,16 +3,16 @@ package bootstrap.liftweb
 import net.liftweb._
 import util._
 import Helpers._
-
 import common._
 import http._
 //import js.jquery.JQueryArtifacts
 import sitemap._
 import Loc._
 import mapper._
-
 import code.model._
-
+import net.liftweb.mapper.ProtoUser
+import scala.xml.Text
+//import com.damianhelme.tbutils
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -40,53 +40,62 @@ class Boot {
     LiftRules.addToPackages("code")
     
     // simple sitemap
-    val entries = List(Menu("Home") / "index",
+    /*val entries = List(Menu("Home") / "index",
       Menu("Page 1") / "page1",
       Menu("Page 2") / "page2",
       Menu("Page 3") / "#"  >> PlaceHolder submenus (
         Menu("Page 3a") / "page3a" ,  
         Menu("Page 3b") / "page3b" ,
         Menu("Page 3c") / "page3c"))
-
-    def sitemap = SiteMap(entries: _*)
-    LiftRules.setSiteMap(sitemap)
-
-
+    */
+    
     // Complex SiteMap
-    /*def sitemap = SiteMap(
-      Menu.i("Home") / "index" >> User.AddUserMenusAfter, // the simple way to declare a menu
+    LiftRules.addToPackages("com.damianhelme.tbutils")
+    val MustBeLoggedIn = If(() => User.loggedIn_?, "")
+    
+    def userLinkText = User.currentUser.map(_.shortName).openOr("not logged in").toString
+    
+    val entries = List(Menu("Home") / "index" >> LocGroup("main"),
+      Menu("Blog") / "blog" >> LocGroup("main"),
+      Menu("Experiments") / "lab" >> LocGroup("main"),
+      Menu("Work") / "work" >> LocGroup("main"),
+      Menu("Contact") / "contact" >> LocGroup("main")
+    )
+    
+    /*val entries = List(Menu("Home") / "index" >> LocGroup("main"),
+      Menu("Page 1") / "page1" >> LocGroup("main"),
+      Menu("Page 2") / "page2" >> LocGroup("main"),
+      Menu("Page 3") / "page3" >> LocGroup("main") >> PlaceHolder submenus (
+      // Menu("Page 3") / "page3" >> LocGroup("main") submenus (
+          Menu("Page 3a") / "page3a" ,  
+          Menu("Page 3b") / "page3b" ,
+          Menu("Page 3c") / "page3c") ,
+      User.loginMenuLoc.open_!,
+      User.createUserMenuLoc.open_!,
+      Menu("user",userLinkText)  / "#" >> 
+        MustBeLoggedIn >> LocGroup("user") >> PlaceHolder submenus (
+            User.logoutMenuLoc.open_!,
+            User.editUserMenuLoc.open_!,
+            User.changePasswordMenuLoc.open_!
+            )
+        )
+    )*/
+        
+    // set the sitemap.  Note if you don't want access control for
+    // each page, just comment this line out.
+    def sitemap = SiteMap(entries: _*)
 
-      // more complex because this menu allows anything in the
-      // /static path to be visible
-      Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
-	       "Static Content")))
+    // more complex because this menu allows anything in the
+    // /static path to be visible
+    // Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
+       //"Static Content"))
 
     def sitemapMutators = User.sitemapMutator
-
-    def userLinkText = User.currentUser.map(_.shortName).openOr("not logged in").toString
- 
-    val entries = List(Menu("Home") / "index" >> LocGroup("main"),
-        Menu("Page 1") / "page1" >> LocGroup("main"),
-        Menu("Page 2") / "page2" >> LocGroup("main"),
-        Menu("Page 3") / "page3" >> LocGroup("main") >> PlaceHolder submenus (
-            Menu("Page 3a") / "page3a" ,  
-            Menu("Page 3b") / "page3b" ,
-            Menu("Page 3c") / "page3c") ,
-        User.loginMenuLoc.open_!,
-        User.createUserMenuLoc.open_!,
-        Menu("user",userLinkText)  / "#" >> 
-          MustBeLoggedIn >> LocGroup("user") >> PlaceHolder submenus (
-              User.logoutMenuLoc.open_!,
-              User.editUserMenuLoc.open_!,
-              User.changePasswordMenuLoc.open_!
-                )
-        )
-
 
     // set the sitemap.  Note if you don't want access control for
     // each page, just comment this line out.
     LiftRules.setSiteMapFunc(() => sitemapMutators(sitemap))
-    */
+    //LiftRules.setSiteMap(sitemap)
 
     //Init the jQuery module, see http://liftweb.net/jquery for more information.
     //To use jQueryModule, uncomment these lines, the jQuery import line at the top,
@@ -115,5 +124,17 @@ class Boot {
 
     // Make a transaction span the whole HTTP request
     S.addAround(DB.buildLoanWrapper)
+  
+    // create a test user if it doesn't already exist
+    def email = "test@example.com"
+    User.find(By(User.email,email)).openOr( {
+        //debug("creating initial user:")
+        User.create.firstName("Test")
+          .lastName("User")
+          .password("password")
+          .email(email)
+          .validated(true)
+          .saveMe
+    })
   }
 }
