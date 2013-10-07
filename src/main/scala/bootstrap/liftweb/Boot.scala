@@ -57,7 +57,7 @@ class Boot {
     
     val entries = List(Menu("Home") / "index" >> LocGroup("main"),
       Menu("Blog") / "blog" >> LocGroup("main"),
-      Menu("Experiments") / "lab" >> LocGroup("main"),
+      Menu("Lab") / "lab" >> LocGroup("main"),
       Menu("Work") / "work" >> LocGroup("main"),
       Menu("Contact") / "contact" >> LocGroup("main")
     )

@@ -15,34 +15,22 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="/scripts/assets/js/html5shiv.js"></script>
-      <script src="/scripts/assets/js/respond.min.js"></script>
+      <script src="/scripts/vendor/html5shiv.js"></script>
+      <script src="/scripts/vendor/respond.min.js"></script>
     <![endif]-->
 
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/main.min.css">
     <script src="/scripts/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body class="lift:content_id=main">
+<body>
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <div>
+        <div>
 
-    <main class="bs-masthead" role="main">
-        <div class="row">
-            <div style="text-align: right">
-                <h1 class="alt">app<img alt="" id="ajax-loader" style="display:none; margin-bottom: 0px; margin-left: 5px" src="/images/ajax-loader.gif"></h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3">
-                <hr />
-                <span class="lift:Menu.builder"></span>
-                <div class="lift:Msgs?showAll=true"></div>
-                <hr />
-            </div>
-
+            <!-- main -->
             <div id="main" class="lift:surround?with=default;at=content">
                 <h2>Welcome to your project!</h2>
                 <p>
@@ -51,14 +39,16 @@
                     </span>
                 </p>
             </div>
+            <!-- /main -->
+
         </div>
-    </main>
+    </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/scripts/vendor/jquery-1.10.2.min.js"><\/script>')</script>
     <script src="/scripts/vendor/bootstrap.min.js"></script>
-    <!---<script src="/scripts/plugins.js"></script>--->
-    <script src="/scripts/main.js"></script>
+    <script src="/scripts/plugins.min.js"></script>
+    <script src="/scripts/main.min.js"></script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
